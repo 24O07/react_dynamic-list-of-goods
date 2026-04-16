@@ -6,29 +6,40 @@ import { Good } from './types/Good';
 
 export const App: React.FC = () => {
   const [goods, setGoods] = useState<Good[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   const loadAll = () => {
     getAll()
-      .then(setGoods)
-      .catch(error => {
-        console.error(error);
+      .then(data => {
+        setGoods(data);
+        setError(null);
+      })
+      .catch(() => {
+        setError('Failed to load goods');
         setGoods([]);
       });
   };
+
   const loadFirstFive = () => {
     get5First()
-      .then(setGoods)
-      .catch(error => {
-        console.error(error);
+      .then(data => {
+        setGoods(data);
+        setError(null);
+      })
+      .catch(() => {
+        setError('Failed to load goods');
         setGoods([]);
       });
   };
 
   const loadRed = () => {
     getRedGoods()
-      .then(setGoods)
-      .catch(error => {
-        console.error(error);
+      .then(data => {
+        setGoods(data);
+        setError(null);
+      })
+      .catch(() => {
+        setError('Failed to load goods');
         setGoods([]);
       });
   };
@@ -48,6 +59,8 @@ export const App: React.FC = () => {
       <button type="button" onClick={loadRed} data-cy="red-button">
         Load red goods
       </button>
+
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <GoodsList goods={goods} />
     </div>

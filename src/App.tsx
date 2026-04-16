@@ -10,20 +10,27 @@ export const App: React.FC = () => {
   const loadAll = () => {
     getAll()
       .then(setGoods)
-
-      
+      .catch(error => {
+        console.error(error);
+        setGoods([]);
+      });
   };
-
   const loadFirstFive = () => {
     get5First()
       .then(setGoods)
-      .catch(() => setGoods([]));
+      .catch(error => {
+        console.error(error);
+        setGoods([]);
+      });
   };
 
   const loadRed = () => {
     getRedGoods()
       .then(setGoods)
-      .catch(() => setGoods([]));
+      .catch(error => {
+        console.error(error);
+        setGoods([]);
+      });
   };
 
   return (

@@ -12,9 +12,10 @@ export function getAll(): Promise<Good[]> {
       return response.json();
     })
     .catch(() => {
-      return []; 
+      return [];
     });
 }
+
 export const get5First = (): Promise<Good[]> => {
   return getAll().then(goods => {
     const sorted = [...goods].sort((a, b) => a.name.localeCompare(b.name));
